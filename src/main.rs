@@ -5,7 +5,8 @@ use axum::{
     routing::get
 };
 
-mod std::goods::routes;
+mod goods;
+mod brands;
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
 struct Data {
@@ -20,7 +21,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init_from_env(env_logger::Env::default().default_filter_or("info"));
 
     let router = axum::Router::new()
-    .route("/test/world", get(routes::get_goods));
+    .route("goods", get(goods::routes::get_goods))
+    .route("brands", get(brands::routes::get_brands));
 
     log::info!("server listening on http://{}:{}", address, port);
     axum::Server::bind(&std::net::SocketAddr::new(
